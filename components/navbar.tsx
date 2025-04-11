@@ -11,9 +11,9 @@ import { AnimatedButton } from "@/components/animations"
 
 const navItems = [
   { name: "Home", href: "/" },
-  { name: "Gallery", href: "/gallery" },
   { name: "About Us", href: "/about" },
   { name: "Our Work", href: "/our-work" },
+  { name: "Gallery", href: "/gallery" },
   { name: "Blood Donation", href: "/blood-donation" },
   { name: "Contact Us", href: "/contact" },
 ]

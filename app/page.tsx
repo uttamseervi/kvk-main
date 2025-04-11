@@ -29,12 +29,13 @@ export default function Home() {
           </TextReveal>
           <div className="flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0 justify-center">
             <AnimatedButton>
-              <Button className="bg-orange-600 hover:bg-orange-700">Join Our Mission</Button>
+              <Link href={"/contact"}><Button className="bg-orange-600 hover:bg-orange-700">Join Our Mission</Button></Link>
             </AnimatedButton>
             <AnimatedButton>
-              <Button variant="outline">
-                Learn More <ChevronRight className="ml-2 h-4 w-4" />
-              </Button>
+              <Link href={"/about"}>
+                <Button variant="outline">
+                  Learn More <ChevronRight className="ml-2 h-4 w-4" />
+                </Button></Link>
             </AnimatedButton>
           </div>
         </div>
