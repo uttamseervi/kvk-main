@@ -12,7 +12,7 @@ const workCategories = [
     title: "Health",
     description:
       "Improving healthcare access and awareness in underserved communities through medical camps, blood donation drives, and health education programs.",
-    image: "https://source.unsplash.com/random/1200x800/?healthcare,medical,camp",
+    image: "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1744378028/3275630-1281620543_mfbb5z.jpg",
     topic: "healthcare,medical,camp,india",
     projects: [
       "Free Medical Camps in Rural Areas",
@@ -26,7 +26,7 @@ const workCategories = [
     title: "Education",
     description:
       "Empowering the next generation through scholarships, educational resources, career guidance, and skill development programs for underprivileged students.",
-    image: "https://source.unsplash.com/random/1200x800/?education,school,india",
+    image: "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1744378350/person-holds-a-book-over-a-stack-and-turns-the-page-1802552817_gixevq.jpg",
     topic: "education,school,india,rural",
     projects: [
       "Scholarship Programs for Deserving Students",
@@ -40,7 +40,7 @@ const workCategories = [
     title: "Environment",
     description:
       "Protecting our natural resources through tree plantation drives, clean-up campaigns, and environmental awareness programs to create a sustainable future.",
-    image: "https://source.unsplash.com/random/1200x800/?environment,planting,trees",
+    image: "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1744379507/Tree_Plantation-825816428_cqcu7c.jpg",
     topic: "environment,planting,trees,conservation",
     projects: [
       "Tree Plantation Drives",
@@ -54,7 +54,7 @@ const workCategories = [
     title: "Art and Culture",
     description:
       "Preserving and promoting Karnataka's rich cultural heritage through festivals, performances, workshops, and cultural exchange programs.",
-    image: "https://source.unsplash.com/random/1200x800/?culture,art,india,performance",
+    image: "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1744378953/Kathakali-Dance-113591244_kxoi6g.jpg",
     topic: "culture,art,india,performance,traditional",
     projects: [
       "Annual Cultural Festivals",
@@ -68,7 +68,7 @@ const workCategories = [
     title: "Sports and Adventure",
     description:
       "Encouraging physical fitness and team spirit through sports tournaments, adventure camps, and outdoor activities for youth development.",
-    image: "https://source.unsplash.com/random/1200x800/?sports,adventure,youth",
+    image: "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1744378954/shutterstock-114911380-4102512431_slkc02.webp",
     topic: "sports,adventure,youth,outdoor",
     projects: [
       "Inter-College Sports Tournaments",
@@ -82,7 +82,7 @@ const workCategories = [
     title: "Natural Disaster Relief",
     description:
       "Providing immediate assistance and long-term rehabilitation support to communities affected by floods, droughts, and other natural calamities.",
-    image: "https://source.unsplash.com/random/1200x800/?disaster,relief,flood",
+    image: "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1744378953/AP21193389703866-e1626147548358-3339018612_u9mbo6.jpg",
     topic: "disaster,relief,flood,volunteer",
     projects: [
       "Emergency Relief Distribution",

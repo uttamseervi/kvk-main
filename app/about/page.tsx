@@ -142,33 +142,27 @@ export default function AboutPage() {
                 topic: "woman,indian,business",
               },
               {
-                name: "Shri. Karthik Rao",
-                role: "Cultural Coordinator",
-                bio: "Classical musician and promoter of traditional art forms",
-                image: "https://source.unsplash.com/random/300x300/?man,musician,indian",
+                name: "Shri. Rishi Manjunath",
+                role: "Junior Tech Lead",
+                bio: "Aspiring web developer and a Entepruner",
+                image: "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1744379909/WhatsApp_Image_2025-04-11_at_19.26.23_63a4b125_xfyptr.jpg",
                 topic: "man,musician,indian",
               },
               {
-                name: "Dr. Meena Patil",
-                role: "Health Initiatives Lead",
-                bio: "Medical professional specializing in rural healthcare access",
-                image: "https://source.unsplash.com/random/300x300/?woman,doctor,indian",
-                topic: "woman,doctor,indian",
+                name: "Shri. Uttam Seervi",
+                role: "Tech Lead",
+                bio: "Passionate Web Developer",
+                image: "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1744380057/WhatsApp_Image_2025-04-11_at_19.30.08_448cda1d_e6gvpv.jpg",
+                topic: "Student, Developer",
               },
               {
-                name: "Shri. Suresh Gowda",
-                role: "Environmental Programs Director",
-                bio: "Environmental scientist focused on sustainable practices",
-                image: "https://source.unsplash.com/random/300x300/?man,environment,indian",
-                topic: "man,environment,indian",
+                name: "Shri. Druva Suresh",
+                role: "Tech Lead",
+                bio: "Web Developer",
+                image: "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1744380462/WhatsApp_Image_2025-04-11_at_19.34.04_9f275eea_ot89kg.jpg",
+                topic: "man,tech,indian",
               },
-              {
-                name: "Smt. Divya Hegde",
-                role: "Youth Outreach Coordinator",
-                bio: "Education specialist developing programs for student engagement",
-                image: "https://source.unsplash.com/random/300x300/?woman,teacher,indian",
-                topic: "woman,teacher,indian",
-              },
+           
             ].map((member, index) => (
               <StaggerItem key={index}>
                 <AnimatedCard>

@@ -38,7 +38,7 @@ export default function Home() {
             </AnimatedButton>
           </div>
         </div>
-        <div className="absolute inset-0 z-0 bg-[url('https://source.unsplash.com/random/1920x1080/?karnataka,culture')] bg-cover bg-center opacity-10"></div>
+        <div className="absolute inset-0 z-0 bg-[url('https://indiachalk.com/wp-content/uploads/2021/09/00.-blog-feature-image-india-chalk-scaled.jpg')]  bg-cover bg-no-repeat opacity-35"></div>
       </section>
 
       {/* Introduction Section */}
@@ -156,28 +156,28 @@ export default function Home() {
                   title: "Cultural Fest 2023",
                   description: "Annual celebration of Karnataka's diverse cultural traditions",
                   icon: Calendar,
-                  image: "https://source.unsplash.com/random/600x400/?karnataka,festival",
+                  image: "https://indiachalk.com/wp-content/uploads/2021/09/00.-blog-feature-image-india-chalk-scaled.jpg",
                   topic: "festival,culture",
                 },
                 {
                   title: "Flood Relief Drive",
                   description: "Emergency assistance to affected communities in North Karnataka",
                   icon: Heart,
-                  image: "https://source.unsplash.com/random/600x400/?flood,relief",
+                  image: "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1744377769/Kerala_zr4rcv.jpg",
                   topic: "flood,relief,volunteer",
                 },
                 {
                   title: "Youth Leadership Program",
                   description: "Mentoring the next generation of community leaders",
                   icon: Users,
-                  image: "https://source.unsplash.com/random/600x400/?youth,leadership",
+                  image: "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1744376267/youth-leadership_aavcsf.jpg",
                   topic: "youth,leadership,education",
                 },
                 {
                   title: "Rural Education Initiative",
                   description: "Bringing quality education to underserved rural areas",
                   icon: Award,
-                  image: "https://source.unsplash.com/random/600x400/?rural,education,india",
+                  image: "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1744376952/1_Ek74u2m7usid9rvFIMSxqA_zv2ibz.jpg",
                   topic: "rural,education,india",
                 },
               ].map((item, index) => (
