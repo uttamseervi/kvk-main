@@ -55,10 +55,9 @@ export default function Footer() {
             <div className="space-y-3">
               <h3 className="text-sm font-semibold">Contact</h3>
               <address className="not-italic text-sm text-gray-600 space-y-2">
-                <p>123 Cultural Street</p>
-                <p>Bengaluru, Karnataka 560001</p>
+                <p>#646 18th main padmanabhanagara, Bengaluru, Karnataka 560045</p>
                 <p>India</p>
-                <p>Phone: +91 9876543210</p>
+                <p>Phone: +91 9980004444</p>
                 <p>Email: info@kvk.org</p>
               </address>
             </div>
@@ -66,7 +65,7 @@ export default function Footer() {
             <div className="space-y-3">
               <h3 className="text-sm font-semibold">Follow Us</h3>
               <div className="flex space-x-4">
-                <Link href="#" className="text-gray-600 hover:text-orange-600">
+                <Link href="https://www.facebook.com/karnataka.koota/" className="text-gray-600 hover:text-orange-600">
                   <Facebook className="h-5 w-5" />
                   <span className="sr-only">Facebook</span>
                 </Link>
@@ -74,11 +73,11 @@ export default function Footer() {
                   <Twitter className="h-5 w-5" />
                   <span className="sr-only">Twitter</span>
                 </Link>
-                <Link href="#" className="text-gray-600 hover:text-orange-600">
+                <Link href="https://www.instagram.com/karnataka_vidyarthi_koota?igsh=a3piOWdkOGoxbzVv" className="text-gray-600 hover:text-orange-600">
                   <Instagram className="h-5 w-5" />
                   <span className="sr-only">Instagram</span>
                 </Link>
-                <Link href="#" className="text-gray-600 hover:text-orange-600">
+                <Link href="https://www.youtube.com/@kvkocean" className="text-gray-600 hover:text-orange-600">
                   <Youtube className="h-5 w-5" />
                   <span className="sr-only">YouTube</span>
                 </Link>

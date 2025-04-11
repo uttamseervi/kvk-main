@@ -53,9 +53,12 @@ export default function Home() {
                 cultural identity as a force for positive change.
               </p>
               <p className="text-lg text-gray-600">
-                Our vision is to create a global network of individuals connected by their love for Karnataka's culture
-                and their commitment to social service, fostering a sense of belonging and responsibility towards our
-                heritage and community.
+                To channelize the energy of the youth in the rightful direction
+                for the betterment of the society, by helping in all-round
+                development of youth and public in various aspects viz: Health,
+                Education, Cultural, Environment, Sports and Adventure,
+                Natural disaster.
+
               </p>
             </div>
           </div>
