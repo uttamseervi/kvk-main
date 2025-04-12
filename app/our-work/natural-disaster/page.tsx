@@ -64,47 +64,23 @@ export default function NaturalDisasterPage() {
                     </Card>
                 </FadeUpSection>
 
-                <FadeUpSection delay={0.3}>
-                    <h2 className="text-3xl font-bold mb-6">Our Key Projects</h2>
-                    <div className="grid md:grid-cols-2 gap-6">
-                        <Card>
-                            <CardContent className="p-6 space-y-4">
-                                <h3 className="text-xl font-bold">Emergency Relief Distribution</h3>
-                                <p>
-                                    We provide immediate relief materials including food, water, clothing, and medical supplies to
-                                    communities affected by natural disasters.
-                                </p>
-                            </CardContent>
-                        </Card>
-                        <Card>
-                            <CardContent className="p-6 space-y-4">
-                                <h3 className="text-xl font-bold">Rehabilitation Programs</h3>
-                                <p>
-                                    Our long-term rehabilitation programs help affected communities rebuild their lives through housing
-                                    assistance, livelihood support, and psychological counseling.
-                                </p>
-                            </CardContent>
-                        </Card>
-                        <Card>
-                            <CardContent className="p-6 space-y-4">
-                                <h3 className="text-xl font-bold">Disaster Preparedness Training</h3>
-                                <p>
-                                    We conduct training programs to help communities prepare for potential disasters, teaching them safety
-                                    protocols and emergency response techniques.
-                                </p>
-                            </CardContent>
-                        </Card>
-                        <Card>
-                            <CardContent className="p-6 space-y-4">
-                                <h3 className="text-xl font-bold">Rebuilding Community Infrastructure</h3>
-                                <p>
-                                    We assist in rebuilding essential community infrastructure like schools, healthcare centers, and water
-                                    systems that are damaged during natural disasters.
-                                </p>
-                            </CardContent>
-                        </Card>
-                    </div>
+                <FadeUpSection delay={0.35}>
+                    <Card>
+                        <CardContent className="p-6 space-y-6">
+                            <h2 className="text-2xl font-bold">KVK’s Role in Disaster Relief</h2>
+                            <p className="text-muted-foreground">
+                                KVK is a non-profit, voluntary organization independent of the government, dedicated to addressing key societal and developmental issues. In times of natural disaster, KVK acts swiftly and compassionately to reach those in urgent need.
+                            </p>
+                            <p className="text-muted-foreground">
+                                During major flood relief efforts, KVK has played a pivotal role by providing emergency supplies, organizing health camps, and assisting in rescue operations. From setting up temporary shelters to being on the frontlines, the team prioritizes saving lives and restoring stability.
+                            </p>
+                            <p className="text-muted-foreground">
+                                KVK operates at the grassroots level, working hand-in-hand with communities. Whether it's mobilizing local support, offering training, spreading awareness, or advocating for sustainable recovery, the organization bridges the gap between those affected and those eager to help.
+                            </p>
+                        </CardContent>
+                    </Card>
                 </FadeUpSection>
+
 
                 <FadeUpSection delay={0.4}>
                     <Card>

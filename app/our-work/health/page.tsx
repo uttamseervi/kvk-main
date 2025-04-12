@@ -25,7 +25,7 @@ const healthData = {
   id: "health",
   title: "Health",
   description:
-    "Improving healthcare access and awareness in underserved communities through medical camps, blood donation drives, and health education programs.",
+    "Improving healthcare access and awareness in underserved communSities through medical camps, blood donation drives, and health education programs.",
   image: "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1744378028/3275630-1281620543_mfbb5z.jpg",
   topic: "healthcare,medical,camp,india",
   projects: [
@@ -89,42 +89,51 @@ export function HealthInitiativeDetails({ onClose }: HealthInitiativeDetailsProp
 
               <Separator />
 
-              <FadeUpSection delay={0.1}>
-                <div>
-                  <h2 className="text-2xl font-semibold mb-4">Our Health Projects</h2>
-                  <StaggerContainer>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {healthData.projects.map((project, index) => (
-                        <StaggerItem key={index}>
-                          <AnimatedCard>
-                            <Card className="border-l-4 border-l-emerald-500">
-                              <CardContent className="p-4">
-                                <div className="flex items-start">
-                                  <div className="bg-emerald-100 p-2 rounded-full mr-3">
-                                    {index % 2 === 0 ? (
-                                      <Users className="h-5 w-5 text-emerald-600" />
-                                    ) : (
-                                      <Calendar className="h-5 w-5 text-emerald-600" />
-                                    )}
-                                  </div>
-                                  <div>
-                                    <h3 className="font-medium">{project}</h3>
-                                    <p className="text-sm text-muted-foreground mt-1">
-                                      {index % 2 === 0
-                                        ? "Ongoing initiative serving communities in need"
-                                        : "Regular events organized throughout the year"}
-                                    </p>
-                                  </div>
-                                </div>
-                              </CardContent>
-                            </Card>
-                          </AnimatedCard>
-                        </StaggerItem>
-                      ))}
-                    </div>
-                  </StaggerContainer>
-                </div>
-              </FadeUpSection>
+<FadeUpSection delay={0.3}>
+  <div>
+    <h2 className="text-2xl font-semibold mb-4">KVK Health Interventions</h2>
+    <div className="space-y-4 text-muted-foreground text-lg">
+      <p>
+        KVK interventions in the health sector work to improve access to quality health services for the poor and
+        marginalised communities. By identifying the root causes of healthcare challenges, KVK works at the individual,
+        community and systemic levels to develop innovative solutions and implement quality healthcare services.
+      </p>
+      <p>
+        Their efforts span community engagement, collaborations with government and civil society organisations, and
+        emphasize inclusion—particularly for women and children.
+      </p>
+
+      <ul className="list-disc pl-6 space-y-2 text-base">
+        <li>Organise free health check-up camps in collaboration with hospitals.</li>
+        <li>Conduct awareness programs on AIDS, Dengue, Drug abuse, and Chicken Guinea.</li>
+        <li>Campaigns against female foeticide and education on child vaccination.</li>
+        <li>Promote hygiene and cleanliness in rural schools and villages.</li>
+        <li>Educate the public on health department schemes and benefits.</li>
+        <li>Identify early-stage health issues among poor students and help access treatment.</li>
+        <li>Provide dental extractions and free implants under the “Dantha Bhagya” scheme.</li>
+        <li>Offer free cataract surgeries under state schemes for BPL families.</li>
+      </ul>
+
+      <p className="pt-4   font-semibold underline">KVK’s Blood Link Initiative</p>
+      <p>
+        KVK motivates youth, especially at age 18, to become voluntary blood donors. Despite a large eligible population,
+        only 4–7% donate, and most only once a year. With an annual state requirement of 6.25 lakh units, there's a critical
+        gap.
+      </p>
+      <p>
+        KVK was born from a real emergency where friends struggled to find blood, realizing the importance of proactive
+        voluntary donation. Since then, they’ve pledged to address this challenge across Karnataka.
+      </p>
+
+      <p className="pt-4 font-bold underline">Karl Landsteiner – KVK Hall</p>
+      <p>
+        The state’s first blood donor office, named after the discoverer of ABO blood groups, commemorates voluntary blood
+        donors and serves as a multi-purpose hall supporting blood donation efforts.
+      </p>
+    </div>
+  </div>
+</FadeUpSection>
+
 
               <Separator />
 

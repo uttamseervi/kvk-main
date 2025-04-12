@@ -63,47 +63,34 @@ export default function EnvironmentPage() {
                     </Card>
                 </FadeUpSection>
 
-                <FadeUpSection delay={0.3}>
-                    <h2 className="text-3xl font-bold mb-6">Our Key Projects</h2>
-                    <div className="grid md:grid-cols-2 gap-6">
-                        <Card>
-                            <CardContent className="p-6 space-y-4">
-                                <h3 className="text-xl font-bold">Tree Plantation Drives</h3>
-                                <p>
-                                    We regularly organize tree plantation drives across Bangalore and surrounding areas, contributing to
-                                    increased green cover and combating air pollution.
-                                </p>
-                            </CardContent>
-                        </Card>
-                        <Card>
-                            <CardContent className="p-6 space-y-4">
-                                <h3 className="text-xl font-bold">Beach and Lake Clean-up Campaigns</h3>
-                                <p>
-                                    Our volunteers actively participate in cleaning up lakes, rivers, and public spaces, removing waste
-                                    and plastic to protect aquatic ecosystems.
-                                </p>
-                            </CardContent>
-                        </Card>
-                        <Card>
-                            <CardContent className="p-6 space-y-4">
-                                <h3 className="text-xl font-bold">Plastic-Free Initiatives</h3>
-                                <p>
-                                    We promote plastic-free alternatives and conduct awareness campaigns about the harmful effects of
-                                    single-use plastics on our environment.
-                                </p>
-                            </CardContent>
-                        </Card>
-                        <Card>
-                            <CardContent className="p-6 space-y-4">
-                                <h3 className="text-xl font-bold">Environmental Awareness Workshops</h3>
-                                <p>
-                                    We conduct workshops in schools and communities to educate people about environmental conservation,
-                                    waste management, and sustainable living practices.
-                                </p>
-                            </CardContent>
-                        </Card>
-                    </div>
+                <FadeUpSection delay={0.35}>
+                    <Card>
+                        <CardContent className="p-6 space-y-6">
+                            <h2 className="text-2xl font-bold">KVK’s Environmental Commitment</h2>
+                            <p className="text-lg text-muted-foreground italic">
+                                “We don’t inherit the Earth from our ancestors, we borrow it from our children.”
+                            </p>
+                            <p className="text-muted-foreground">
+                                Preserving the environment is a universal obligation. A single tree can absorb approximately a ton of carbon dioxide over its lifetime. Tree planting and environmental education are crucial to restoring our planet and securing a future for the next generations.
+                            </p>
+                            <p className="text-muted-foreground">
+                                KVK, a dedicated NGO working toward environmental protection in India, understands that conservation cannot be the effort of one — it takes awareness, collaboration, and action. Environmental preservation is deeply embedded in KVK’s core values.
+                            </p>
+                            <div className="space-y-4 text-muted-foreground text-base">
+                                <h3 className="text-xl font-semibold mt-4">What We Do</h3>
+                                <ul className="list-disc pl-6 space-y-2">
+                                    <li>Educate communities about Ground Water Replenishment, Rainwater Harvesting, and the dangers of water wastage.</li>
+                                    <li>Raise awareness about the harmful effects of e-waste and plastics on our environment.</li>
+                                    <li>Plant saplings to preserve greenery amidst urban expansion and promote the value of medicinal herbs in collaboration with government bodies.</li>
+                                    <li>Organize “Clean-Up” drives in tourist spots and parks involving local students and volunteers to remove plastic waste and restore natural beauty.</li>
+                                    <li>Conduct educational programs for farmers on scientific agricultural techniques to encourage sustainable farming practices.</li>
+                                    <li>Support both government and private missions aimed at wildlife conservation and biodiversity preservation.</li>
+                                </ul>
+                            </div>
+                        </CardContent>
+                    </Card>
                 </FadeUpSection>
+
 
                 <FadeUpSection delay={0.4}>
                     <Card>

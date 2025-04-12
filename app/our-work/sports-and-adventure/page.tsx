@@ -62,47 +62,31 @@ export default function SportsAndAdventurePage() {
                     </Card>
                 </FadeUpSection>
 
-                <FadeUpSection delay={0.3}>
-                    <h2 className="text-3xl font-bold mb-6">Our Key Projects</h2>
-                    <div className="grid md:grid-cols-2 gap-6">
-                        <Card>
-                            <CardContent className="p-6 space-y-4">
-                                <h3 className="text-xl font-bold">Inter-College Sports Tournaments</h3>
-                                <p>
-                                    We organize annual sports tournaments for college students, providing a platform for young athletes to
-                                    showcase their talents and fostering healthy competition.
-                                </p>
-                            </CardContent>
-                        </Card>
-                        <Card>
-                            <CardContent className="p-6 space-y-4">
-                                <h3 className="text-xl font-bold">Adventure Camps for Youth</h3>
-                                <p>
-                                    Our adventure camps offer young people the opportunity to experience outdoor activities like trekking,
-                                    rock climbing, and camping, helping them develop courage and resilience.
-                                </p>
-                            </CardContent>
-                        </Card>
-                        <Card>
-                            <CardContent className="p-6 space-y-4">
-                                <h3 className="text-xl font-bold">Traditional Sports Revival</h3>
-                                <p>
-                                    We work to revive and promote traditional Indian sports like Kabaddi, Kho-Kho, and Gilli-Danda,
-                                    preserving our sporting heritage for future generations.
-                                </p>
-                            </CardContent>
-                        </Card>
-                        <Card>
-                            <CardContent className="p-6 space-y-4">
-                                <h3 className="text-xl font-bold">Sports Training for Underprivileged Children</h3>
-                                <p>
-                                    We provide sports equipment and training to underprivileged children, giving them access to sporting
-                                    opportunities they might not otherwise have.
-                                </p>
-                            </CardContent>
-                        </Card>
-                    </div>
+                <FadeUpSection delay={0.35}>
+                    <Card>
+                        <CardContent className="p-6 space-y-6">
+                            <h2 className="text-2xl font-bold">KVK’s Sports and Adventure Initiatives</h2>
+                            <p className="text-muted-foreground">
+                                Karnataka is fast becoming not only a hub for information technology but also a hotspot for adventure seekers from around the world. With lush trekking trails and an expanding range of adventure sports like river rafting, the state is a paradise for nature and thrill lovers.
+                            </p>
+                            <p className="text-muted-foreground">
+                                KVK sees sports as a vital medium for inclusion and growth. Beyond just physical development, sports instill discipline, confidence, and camaraderie. At KVK, students are encouraged to explore their athletic interests with passion and are often trained to compete at the national level. Our programs actively involve beneficiaries across various initiatives in sporting and adventure activities.
+                            </p>
+                            <div className="space-y-4 text-muted-foreground text-base">
+                                <h3 className="text-xl font-semibold mt-4">What We Do</h3>
+                                <ul className="list-disc pl-6 space-y-2">
+                                    <li>Organize sports meets for rural students in collaboration with government and corporate entities.</li>
+                                    <li>Partner with the Department of Youth Affairs and Sports to host competitive events promoting sportsmanship and inclusivity.</li>
+                                    <li>Train students in trekking with certified instructors through local sports associations, fostering environmental appreciation.</li>
+                                    <li>Coordinate with Sports Clubs and Corporate sponsors to offer paragliding, river rafting, rappelling, and more, boosting adventure tourism in Karnataka.</li>
+                                    <li>Conduct inter-college sports competitions uniting students from urban and rural backgrounds, giving them exposure to global sports culture.</li>
+                                    <li>Revive traditional Indian sports that are on the verge of being forgotten, preserving cultural legacy through play.</li>
+                                </ul>
+                            </div>
+                        </CardContent>
+                    </Card>
                 </FadeUpSection>
+
 
                 <FadeUpSection delay={0.4}>
                     <Card>

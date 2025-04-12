@@ -64,47 +64,34 @@ export default function EducationPage() {
                     </Card>
                 </FadeUpSection>
 
-                <FadeUpSection delay={0.3}>
-                    <h2 className="text-3xl font-bold mb-6">Our Key Projects</h2>
-                    <div className="grid md:grid-cols-2 gap-6">
-                        <Card>
-                            <CardContent className="p-6 space-y-4">
-                                <h3 className="text-xl font-bold">Scholarship Programs for Deserving Students</h3>
-                                <p>
-                                    We provide financial assistance to academically gifted students from economically disadvantaged
-                                    backgrounds, helping them pursue higher education without financial constraints.
-                                </p>
-                            </CardContent>
-                        </Card>
-                        <Card>
-                            <CardContent className="p-6 space-y-4">
-                                <h3 className="text-xl font-bold">Career Guidance Seminars</h3>
-                                <p>
-                                    Our career guidance seminars connect students with professionals from various fields, providing
-                                    insights into different career paths and helping them make informed decisions about their future.
-                                </p>
-                            </CardContent>
-                        </Card>
-                        <Card>
-                            <CardContent className="p-6 space-y-4">
-                                <h3 className="text-xl font-bold">Digital Literacy Initiatives</h3>
-                                <p>
-                                    In today's digital world, computer literacy is essential. Our digital literacy programs equip students
-                                    with basic computer skills, preparing them for the modern workforce.
-                                </p>
-                            </CardContent>
-                        </Card>
-                        <Card>
-                            <CardContent className="p-6 space-y-4">
-                                <h3 className="text-xl font-bold">Educational Material Distribution</h3>
-                                <p>
-                                    We regularly distribute books, stationery, and other educational materials to underprivileged
-                                    students, ensuring they have the resources they need to learn effectively.
-                                </p>
-                            </CardContent>
-                        </Card>
-                    </div>
+                <FadeUpSection delay={0.35}>
+                    <Card>
+                        <CardContent className="p-6 space-y-6">
+                            <h2 className="text-2xl font-bold">KVK's Holistic Approach to Education</h2>
+                            <p className="text-lg text-muted-foreground">
+                                Students are the future of a nation. For an emerging country like India, the development of underprivileged students is key to national progress, with education as its cornerstone. But true educational empowerment cannot be achieved without first supporting the family – especially the mother – through healthcare, empowerment, and income stability.
+                            </p>
+                            <p className="text-muted-foreground">
+                                Realizing this, KVK adopts a lifecycle approach that begins in the corridors of education and extends to family welfare, livelihood support, and community engagement – especially through women empowerment. This comprehensive model supports less privileged children, their families, and the broader community.
+                            </p>
+                            <div className="space-y-4 text-muted-foreground text-base">
+                                <h3 className="text-xl font-semibold mt-4">What We Do</h3>
+                                <ul className="list-disc pl-6 space-y-2">
+                                    <li>Conduct personality development programs for students.</li>
+                                    <li>Promote adult education programs within underserved communities.</li>
+                                    <li>Introduce Mathematics modules to government school students through specialized workshops.</li>
+                                    <li>Host technical talks on advancements in technology, including computer literacy.</li>
+                                    <li>Educate students about various government scholarship schemes for pursuing higher education.</li>
+                                    <li>Organize Lego Robotics Workshops to spark innovation and creativity in young minds.</li>
+                                    <li>Host a National E-Conference on novel trends in science and technology.</li>
+                                    <li>Provide financial assistance to students pursuing higher studies.</li>
+                                    <li>Arrange technical talks, including sessions by Principal Modelling Engineers from Dialog Semiconductors.</li>
+                                </ul>
+                            </div>
+                        </CardContent>
+                    </Card>
                 </FadeUpSection>
+
 
                 <FadeUpSection delay={0.4}>
                     <Card>

@@ -61,43 +61,29 @@ export default function ArtAndCulturePage() {
                     </Card>
                 </FadeUpSection>
 
-                <FadeUpSection delay={0.3}>
-                    <h2 className="text-3xl font-bold mb-6">Our Key Projects</h2>
-                    <div className="grid md:grid-cols-2 gap-6">
-                        <Card>
-                            <CardContent className="p-6 space-y-4">
-                                <h3 className="text-xl font-bold">Annual Cultural Festivals</h3>
-                                <p>
-                                    We organize annual cultural festivals that showcase various traditional art forms, music, and dance performances, providing a platform for both established and emerging artists.
-                                </p>
-                            </CardContent>
-                        </Card>
-                        <Card>
-                            <CardContent className="p-6 space-y-4">
-                                <h3 className="text-xl font-bold">Traditional Art Workshops</h3>
-                                <p>
-                                    Our workshops on traditional art forms like Yakshagana, folk music, and classical dance help preserve these art forms by passing them on to the younger generation.
-                                </p>
-                            </CardContent>
-                        </Card>
-                        <Card>
-                            <CardContent className="p-6 space-y-4">
-                                <h3 className="text-xl font-bold">Kannada Language Promotion</h3>
-                                <p>
-                                    We conduct various programs to promote the Kannada language, including literary events, poetry recitals, and competitions for school and college students.
-                                </p>
-                            </CardContent>
-                        </Card>
-                        <Card>
-                            <CardContent className="p-6 space-y-4">
-                                <h3 className="text-xl font-bold">Folk Art Preservation Programs</h3>
-                                <p>
-                                    Our initiatives focus on documenting and preserving endangered folk art forms of Karnataka, ensuring they continue to thrive in the modern era.
-                                </p>
-                            </CardContent>
-                        </Card>
-                    </div>
-                </FadeUpSection>
+                <FadeUpSection delay={0.35}>
+  <Card>
+    <CardContent className="p-6 space-y-6">
+      <h2 className="text-2xl font-bold">KVK’s Cultural Mission</h2>
+      <p className="text-lg text-muted-foreground">
+        Team KVK emphasizes the importance of preserving, promoting, and propagating the language, culture, and heritage of Karnataka both in India and abroad. They also focus on developing the Kannada language through the strategic use of media and technology to achieve this vision.
+      </p>
+      <div className="space-y-4 text-muted-foreground text-base">
+        <h3 className="text-xl font-semibold mt-4">What We Do</h3>
+        <ul className="list-disc pl-6 space-y-2">
+          <li>Create platforms to showcase latent talent in students from various regions, appreciating their skills in performing arts.</li>
+          <li>Protect and foster the diminishing Desi Folk Arts.</li>
+          <li>Train students in dance, drama, singing, and various other performing arts, and provide a stage to encourage and promote their passion.</li>
+          <li>Conduct street plays on social issues to raise awareness in the community.</li>
+          <li>Support book release events to uplift and motivate young authors.</li>
+          <li>Collaborate with Kannada Sahitya Parishath in their developmental initiatives.</li>
+          <li>Screen educational documentaries and heritage presentations to preserve and promote local culture and history.</li>
+        </ul>
+      </div>
+    </CardContent>
+  </Card>
+</FadeUpSection>
+
 
                 <FadeUpSection delay={0.4}>
                     <Card>
