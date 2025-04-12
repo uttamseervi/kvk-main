@@ -132,10 +132,12 @@ export default function OurWorkPage() {
 
                     <div className="pt-4">
                       <AnimatedButton>
-                        <Button variant="outline" className="gap-2">
+                       <Link href={`/our-work/${category.id}`}>
+                       <Button variant="outline" className="gap-2">
                           Learn More About {category.title} Initiatives
                           <ChevronRight className="h-4 w-4" />
                         </Button>
+                       </Link>
                       </AnimatedButton>
                     </div>
                   </div>
