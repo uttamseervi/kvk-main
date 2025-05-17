@@ -83,7 +83,7 @@ const galleryItems = [
     title: "Blood Donation Camp",
     category: "Social Service",
     description: "Community blood donation initiative to support local hospitals",
-    image: "https://source.unsplash.com/random/800x600/?blood,donation",
+    image: "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1747465199/360_F_807774034_D8rcB1wbc8b9lXin4oaQXUBxUqFdsR8L_mou3iw.webp",
     topic: "blood,donation,medical",
   },
   {
