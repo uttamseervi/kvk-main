@@ -7,20 +7,21 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { MapPin, Phone, Mail, Clock } from "lucide-react"
-
+import axios from "axios"
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<any>({
     name: "",
     email: "",
+    phone:"",
     subject: "",
     message: "",
   })
 
-  const [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState<any>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     const { name, value } = e.target
     setFormData({
       ...formData,
@@ -36,13 +37,14 @@ export default function ContactPage() {
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault()
 
     // Basic validation
-    const newErrors = {}
+    const newErrors: any = {}
     if (!formData.name) newErrors.name = "Name is required"
     if (!formData.email) newErrors.email = "Email is required"
+    if (!formData.phone) newErrors.email = "Phone Number is required"
     else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Enter a valid email address"
     if (!formData.subject) newErrors.subject = "Subject is required"
     if (!formData.message) newErrors.message = "Message is required"
@@ -51,16 +53,14 @@ export default function ContactPage() {
       setErrors(newErrors)
       return
     }
-
-    // Form is valid - simulate submission
+    const response = await axios.post("/api/contact", formData)
     setIsSubmitting(true)
 
-    // Simulate API call
     setTimeout(() => {
       setIsSubmitting(false)
       setIsSubmitted(true)
 
-      // Reset form
+
       setFormData({
         name: "",
         email: "",
@@ -208,6 +208,19 @@ export default function ContactPage() {
                       className={errors.subject ? "border-red-500" : ""}
                     />
                     {errors.subject && <p className="text-xs text-red-500">{errors.subject}</p>}
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="subject">
+                      Phone <span className="text-red-500">*</span>
+                    </Label>
+                    <Input
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className={errors.phone ? "border-red-500" : ""}
+                    />
+                    {errors.phone && <p className="text-xs text-red-500">{errors.phone}</p>}
                   </div>
 
                   <div className="space-y-2">
