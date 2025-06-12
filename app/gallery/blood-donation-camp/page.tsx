@@ -13,22 +13,17 @@ export default function GalleryPage() {
   const [previewImage, setPreviewImage] = useState<number | null>(null)
 
   const images = [
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749296/IMG-20190918-WA0012_gng5dg.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749219/_DSC0404_-_Copy_cgxwym.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749241/20171125_193750_2_avvalg.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749292/IMG_20161231_102550_797_s7jnq0.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749295/IMG-20151108-WA0088_h9qoys.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749267/DSC_3777_tsxqx8.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749262/DSC_3552_hrs1pn.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749258/DSC_2983_y3eprc_n9m3gm.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749237/20160705_123535_etzfr8.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749227/_DSC0468_-_Copy_ld2x1e.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749234/100_1506_1_tmgrod.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749257/DSC_2201_g2bots.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749273/DSC01331_vavqvj.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749264/DSC_3553_gg9cbr.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749282/IMG_0062_igc9bh.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749288/IMG_0093_q5wbps.jpg"
+   "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749753584/38085395_1770823026305905_2590104371727433728_o_1770823016305906_o4p5dz.jpg",
+   "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749753587/470219842_8721829927871812_7719422106654196110_n_ipoley.jpg",
+   "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749753587/474065573_8931589480229188_1994995533624553765_n_vxtwod.jpg",
+   "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749753584/469517389_8684109151643890_3233608274370431878_n_fbupza.jpg",
+   "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749753585/469554634_8684111348310337_8748266699388960340_n_vz6ccm.jpg",
+   "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749753584/328119143_1251504925446278_7381478309456258834_n_wrujos.jpg",
+   "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749753584/120326221_3288685811186278_3761305138817387187_o_3288685807852945_iy3yf7.jpg",
+   "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749753584/119665210_3248607268527466_44248586687852711_o_3248607261860800_vogeuo.jpg",
+   "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749753583/83824279_2652359904818875_4212262417905745920_n_jrrw6l.jpg",
+   "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749753584/49124975_1975220332532839_5486481383863877632_o_1975220322532840_uonhef.jpg"
+
   ]
 
   // Function to determine grid layout for bento grid

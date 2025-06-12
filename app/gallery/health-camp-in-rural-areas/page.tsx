@@ -13,22 +13,8 @@ export default function GalleryPage() {
   const [previewImage, setPreviewImage] = useState<number | null>(null)
 
   const images = [
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749296/IMG-20190918-WA0012_gng5dg.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749219/_DSC0404_-_Copy_cgxwym.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749241/20171125_193750_2_avvalg.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749292/IMG_20161231_102550_797_s7jnq0.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749295/IMG-20151108-WA0088_h9qoys.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749267/DSC_3777_tsxqx8.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749262/DSC_3552_hrs1pn.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749258/DSC_2983_y3eprc_n9m3gm.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749237/20160705_123535_etzfr8.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749227/_DSC0468_-_Copy_ld2x1e.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749234/100_1506_1_tmgrod.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749257/DSC_2201_g2bots.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749273/DSC01331_vavqvj.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749264/DSC_3553_gg9cbr.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749282/IMG_0062_igc9bh.jpg",
-    "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749749288/IMG_0093_q5wbps.jpg"
+   "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749753584/49124975_1975220332532839_5486481383863877632_o_1975220322532840_uonhef.jpg",
+   "https://res.cloudinary.com/dl4kyk1ff/image/upload/v1749753583/38071603_1770827426305465_8027841643468029952_o_1770827419638799_idbzh8.jpg"
   ]
 
   // Function to determine grid layout for bento grid
