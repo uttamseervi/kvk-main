@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { motion, AnimatePresence } from "framer-motion"
 import { AnimatedButton } from "@/components/animations"
+import { AuthDialog } from "@/components/auth-dialog"
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -63,35 +64,40 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-6">
-          {navItems.map((item, index) => (
-            <motion.div
-              key={item.name}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
-            >
-              <Link
-                href={item.href}
-                className={cn(
-                  "text-sm font-medium transition-colors hover:text-orange-600 relative",
-                  pathname === item.href ? "text-orange-600" : "text-foreground",
-                )}
+        <div className="flex items-center space-x-6">
+          <nav className="hidden md:flex items-center space-x-6">
+            {navItems.map((item, index) => (
+              <motion.div
+                key={item.name}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
               >
-                {item.name}
-                {pathname === item.href && (
-                  <motion.div
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-orange-600"
-                    layoutId="navbar-indicator"
-                  />
-                )}
-              </Link>
-            </motion.div>
-          ))}
-          <AnimatedButton>
-            <Button className="bg-orange-600 hover:bg-orange-700">Donate Now</Button>
-          </AnimatedButton>
-        </nav>
+                <Link
+                  href={item.href}
+                  className={cn(
+                    "text-sm font-medium transition-colors hover:text-orange-600 relative",
+                    pathname === item.href ? "text-orange-600" : "text-foreground",
+                  )}
+                >
+                  {item.name}
+                  {pathname === item.href && (
+                    <motion.div
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-orange-600"
+                      layoutId="navbar-indicator"
+                    />
+                  )}
+                </Link>
+              </motion.div>
+            ))}
+          </nav>
+          <div className="flex items-center space-x-4">
+            <AnimatedButton>
+              <Button className="bg-orange-600 hover:bg-orange-700">Donate Now</Button>
+            </AnimatedButton>
+            <AuthDialog />
+          </div>
+        </div>
 
         {/* Mobile Navigation Toggle */}
         <motion.button
@@ -134,13 +140,22 @@ export default function Navbar() {
                   </Link>
                 </motion.div>
               ))}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: navItems.length * 0.05 }}
-              >
-                <Button className="bg-orange-600 hover:bg-orange-700 w-full">Donate Now</Button>
-              </motion.div>
+              <div className="flex flex-col space-y-3 pt-2">
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: navItems.length * 0.05 }}
+                >
+                  <Button className="bg-orange-600 hover:bg-orange-700 w-full">Donate Now</Button>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: navItems.length * 0.05 + 0.05 }}
+                >
+                  <AuthDialog />
+                </motion.div>
+              </div>
             </nav>
           </motion.div>
         )}
