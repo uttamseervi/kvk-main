@@ -12,7 +12,7 @@ export default function ContactPage() {
   const [formData, setFormData] = useState<any>({
     name: "",
     email: "",
-    phone:"",
+    phone: "",
     subject: "",
     message: "",
   })
@@ -44,7 +44,7 @@ export default function ContactPage() {
     const newErrors: any = {}
     if (!formData.name) newErrors.name = "Name is required"
     if (!formData.email) newErrors.email = "Email is required"
-    if (!formData.phone) newErrors.email = "Phone Number is required"
+    if (!formData.phone) newErrors.phone = "Phone Number is required"
     else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Enter a valid email address"
     if (!formData.subject) newErrors.subject = "Subject is required"
     if (!formData.message) newErrors.message = "Message is required"
@@ -53,17 +53,16 @@ export default function ContactPage() {
       setErrors(newErrors)
       return
     }
-    const response = await axios.post("/api/contact", formData)
-    setIsSubmitting(true)
 
-    setTimeout(() => {
-      setIsSubmitting(false)
+    try {
+      setIsSubmitting(true)
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/contact`, formData)
+
       setIsSubmitted(true)
-
-
       setFormData({
         name: "",
         email: "",
+        phone: "",
         subject: "",
         message: "",
       })
@@ -72,7 +71,14 @@ export default function ContactPage() {
       setTimeout(() => {
         setIsSubmitted(false)
       }, 5000)
-    }, 1500)
+    } catch (error) {
+      console.error('Error submitting form:', error)
+      setErrors({
+        submit: "Failed to send message. Please try again later."
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -239,7 +245,14 @@ export default function ContactPage() {
                   </div>
 
                   <Button type="submit" className="w-full" disabled={isSubmitting}>
-                    {isSubmitting ? "Sending..." : "Send Message"}
+                    {isSubmitting ? (
+                      <div className="flex items-center justify-center">
+                        <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+                        Sending...
+                      </div>
+                    ) : (
+                      "Send Message"
+                    )}
                   </Button>
                 </form>
               )}
