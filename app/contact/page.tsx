@@ -125,7 +125,7 @@ export default function ContactPage() {
                 <Mail className="mr-3 h-5 w-5 text-orange-600" />
                 <div>
                   <h3 className="font-medium">Email</h3>
-                  <p className="text-sm text-gray-600">info@kvk.org</p>
+                  <p className="text-sm text-gray-600">kvkocean@gmail.com</p>
                   <p className="text-sm text-gray-600">support@kvk.org</p>
                 </div>
               </div>
