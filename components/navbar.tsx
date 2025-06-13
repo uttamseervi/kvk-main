@@ -3,12 +3,21 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Menu, X } from "lucide-react"
+import { Menu, X, LogIn, LogOut, User } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { motion, AnimatePresence } from "framer-motion"
 import { AnimatedButton } from "@/components/animations"
-import { AuthDialog } from "@/components/auth-dialog"
+import { useSession, signOut } from "next-auth/react"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -23,6 +32,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
+  const { data: session } = useSession()
 
   // Handle scroll effect
   useEffect(() => {
@@ -91,11 +101,56 @@ export default function Navbar() {
               </motion.div>
             ))}
           </nav>
-          <div className="flex items-center space-x-4">
+          <div className="items-center space-x-4 md:flex hidden">
             <AnimatedButton>
               <Button className="bg-orange-600 hover:bg-orange-700">Donate Now</Button>
             </AnimatedButton>
-            <AuthDialog />
+            {session ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+                    <Avatar className="h-8 w-8">
+                      <AvatarImage src={session.user?.image || ""} alt={session.user?.name || ""} />
+                      <AvatarFallback>
+                        {session.user?.name?.charAt(0) || <User className="h-4 w-4" />}
+                      </AvatarFallback>
+                    </Avatar>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56" align="end" forceMount>
+                  <DropdownMenuLabel className="font-normal">
+                    <div className="flex flex-col space-y-1">
+                      <p className="text-sm font-medium leading-none">{session.user?.name}</p>
+                      <p className="text-xs leading-none text-muted-foreground">
+                        {session.user?.email}
+                      </p>
+                    </div>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link href="/profile">Profile</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/dashboard">Dashboard</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem
+                    className="text-red-600 focus:text-red-600"
+                    onClick={() => signOut()}
+                  >
+                    <LogOut className="mr-2 h-4 w-4" />
+                    <span>Log out</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Link href="/auth">
+                <Button variant="outline" className="gap-2">
+                  <LogIn className="h-4 w-4" />
+                  Register to KVK
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
 
@@ -148,13 +203,49 @@ export default function Navbar() {
                 >
                   <Button className="bg-orange-600 hover:bg-orange-700 w-full">Donate Now</Button>
                 </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: navItems.length * 0.05 + 0.05 }}
-                >
-                  <AuthDialog />
-                </motion.div>
+                {session ? (
+                  <>
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: navItems.length * 0.05 + 0.05 }}
+                    >
+                      <Link href="/profile" className="w-full">
+                        <Button variant="outline" className="w-full gap-2">
+                          <User className="h-4 w-4" />
+                          Profile
+                        </Button>
+                      </Link>
+                    </motion.div>
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: navItems.length * 0.05 + 0.1 }}
+                    >
+                      <Button
+                        variant="outline"
+                        className="w-full gap-2 text-red-600 hover:text-red-600"
+                        onClick={() => signOut()}
+                      >
+                        <LogOut className="h-4 w-4" />
+                        Log out
+                      </Button>
+                    </motion.div>
+                  </>
+                ) : (
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: navItems.length * 0.05 + 0.05 }}
+                  >
+                    <Link href="/auth" className="w-full">
+                      <Button variant="outline" className="w-full gap-2">
+                        <LogIn className="h-4 w-4" />
+                        Register to KVK
+                      </Button>
+                    </Link>
+                  </motion.div>
+                )}
               </div>
             </nav>
           </motion.div>

@@ -14,142 +14,117 @@ import { Search, Filter, Phone, Mail, MapPin } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 
 // Dummy donor data
-const dummyDonors = [
+const dummyDonors: Donor[] = [
   {
     id: 1,
     name: "Arun Kumar",
-    age: 28,
-    gender: "Male",
-    bloodGroup: "O+",
-    location: "Bengaluru",
-    phone: "9876543210",
     email: "arun@example.com",
-    status: "active",
+    phone: "9876543210",
+    bloodGroup: "O+",
+    city: "Bengaluru",
+    message: "Available for emergency donations",
+    donationDate: new Date(),
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: 2,
     name: "Priya Sharma",
-    age: 32,
-    gender: "Female",
-    bloodGroup: "A+",
-    location: "Mysuru",
-    phone: "9876543211",
     email: "priya@example.com",
-    status: "active",
+    phone: "9876543211",
+    bloodGroup: "A+",
+    city: "Mysuru",
+    message: "Regular donor",
+    donationDate: new Date(),
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: 3,
     name: "Karthik Rao",
-    age: 25,
-    gender: "Male",
-    bloodGroup: "B-",
-    location: "Mangaluru",
-    phone: "9876543212",
     email: "karthik@example.com",
-    status: "inactive",
+    phone: "9876543212",
+    bloodGroup: "B-",
+    city: "Mangaluru",
+    message: "Available on weekends",
+    donationDate: new Date(),
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: 4,
     name: "Divya Hegde",
-    age: 30,
-    gender: "Female",
-    bloodGroup: "AB+",
-    location: "Hubballi",
-    phone: "9876543213",
     email: "divya@example.com",
-    status: "active",
+    phone: "9876543213",
+    bloodGroup: "AB+",
+    city: "Hubballi",
+    message: "Emergency contact available",
+    donationDate: new Date(),
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: 5,
     name: "Suresh Gowda",
-    age: 35,
-    gender: "Male",
-    bloodGroup: "O-",
-    location: "Bengaluru",
-    phone: "9876543214",
     email: "suresh@example.com",
-    status: "active",
-  },
-  {
-    id: 6,
-    name: "Lakshmi Devi",
-    age: 27,
-    gender: "Female",
-    bloodGroup: "A-",
-    location: "Belagavi",
-    phone: "9876543215",
-    email: "lakshmi@example.com",
-    status: "inactive",
-  },
-  {
-    id: 7,
-    name: "Venkatesh Murthy",
-    age: 40,
-    gender: "Male",
-    bloodGroup: "B+",
-    location: "Shivamogga",
-    phone: "9876543216",
-    email: "venkatesh@example.com",
-    status: "active",
-  },
-  {
-    id: 8,
-    name: "Ananya Sharma",
-    age: 29,
-    gender: "Female",
-    bloodGroup: "AB-",
-    location: "Bengaluru",
-    phone: "9876543217",
-    email: "ananya@example.com",
-    status: "active",
-  },
-  {
-    id: 9,
-    name: "Rajesh Kumar",
-    age: 33,
-    gender: "Male",
-    bloodGroup: "O+",
-    location: "Mysuru",
-    phone: "9876543218",
-    email: "rajesh@example.com",
-    status: "inactive",
-  },
-  {
-    id: 10,
-    name: "Meena Patil",
-    age: 31,
-    gender: "Female",
-    bloodGroup: "A+",
-    location: "Dharwad",
-    phone: "9876543219",
-    email: "meena@example.com",
-    status: "active",
-  },
+    phone: "9876543214",
+    bloodGroup: "O-",
+    city: "Bengaluru",
+    message: "Universal donor",
+    donationDate: new Date(),
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  }
 ]
+
+// Define the donor type
+type Donor = {
+  id: number
+  name: string
+  email: string
+  phone?: string
+  bloodGroup: string
+  city: string
+  message?: string
+  donationDate: Date
+  createdAt: Date
+  updatedAt: Date
+}
 
 export default function BloodDonationPage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [locationFilter, setLocationFilter] = useState("all")
   const [bloodGroupFilter, setBloodGroupFilter] = useState("all")
-  const [statusFilter, setStatusFilter] = useState("all")
 
   // Form state
   const [formData, setFormData] = useState({
-    fullName: "",
-    age: "",
-    gender: "",
-    bloodGroup: "",
-    location: "",
-    phone: "",
+    name: "",
     email: "",
-    donorStatus: "active",
+    phone: "",
+    bloodGroup: "",
+    city: "",
+    message: "",
   })
 
   // Form validation state
-  const [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState<Record<string, string>>({})
+
+  // Message suggestions
+  const messageSuggestions = [
+    "Available for emergency donations",
+    "Regular donor - Available on weekends",
+    "Available during office hours",
+    "Can donate on short notice",
+    "Available in emergency situations",
+    "Regular donor - Last donation: [Date]",
+    "Available for specific blood type requests",
+    "Can travel within city limits for donation",
+    "Available for scheduled donations",
+    "Emergency contact available 24/7"
+  ]
 
   // Handle form input changes
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | { target: { name: string; value: string } }) => {
     const { name, value } = e.target
     setFormData({
       ...formData,
@@ -160,28 +135,25 @@ export default function BloodDonationPage() {
     if (errors[name]) {
       setErrors({
         ...errors,
-        [name]: null,
+        [name]: "",
       })
     }
   }
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
     // Basic validation
-    const newErrors = {}
-    if (!formData.fullName) newErrors.fullName = "Name is required"
-    if (!formData.age) newErrors.age = "Age is required"
-    else if (Number.parseInt(formData.age) < 18 || Number.parseInt(formData.age) > 65)
-      newErrors.age = "Age must be between 18 and 65"
-    if (!formData.gender) newErrors.gender = "Gender is required"
-    if (!formData.bloodGroup) newErrors.bloodGroup = "Blood group is required"
-    if (!formData.location) newErrors.location = "Location is required"
-    if (!formData.phone) newErrors.phone = "Phone number is required"
-    else if (!/^\d{10}$/.test(formData.phone)) newErrors.phone = "Enter a valid 10-digit phone number"
+    const newErrors: Record<string, string> = {}
+    if (!formData.name) newErrors.name = "Name is required"
     if (!formData.email) newErrors.email = "Email is required"
     else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Enter a valid email address"
+    if (formData.phone && !/^\d{10}$/.test(formData.phone)) newErrors.phone = "Enter a valid 10-digit phone number"
+    if (!formData.bloodGroup) newErrors.bloodGroup = "Blood group is required"
+    if (!formData.city) newErrors.city = "City is required"
+    if (!formData.message) newErrors.message = "Message is required"
+    else if (formData.message.length < 10) newErrors.message = "Message should be at least 10 characters long"
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors)
@@ -193,42 +165,37 @@ export default function BloodDonationPage() {
 
     // Reset form
     setFormData({
-      fullName: "",
-      age: "",
-      gender: "",
-      bloodGroup: "",
-      location: "",
-      phone: "",
+      name: "",
       email: "",
-      donorStatus: "active",
+      phone: "",
+      bloodGroup: "",
+      city: "",
+      message: "",
     })
   }
 
   // Filter donors based on search and filters
-  const filteredDonors = dummyDonors.filter((donor) => {
+  const filteredDonors = dummyDonors.filter((donor: Donor) => {
     // Search term filter
     const matchesSearch =
       donor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      donor.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      donor.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
       donor.bloodGroup.toLowerCase().includes(searchTerm.toLowerCase())
 
     // Location filter
-    const matchesLocation = locationFilter === "all" || donor.location === locationFilter
+    const matchesLocation = locationFilter === "all" || donor.city === locationFilter
 
     // Blood group filter
     const matchesBloodGroup = bloodGroupFilter === "all" || donor.bloodGroup === bloodGroupFilter
 
-    // Status filter
-    const matchesStatus = statusFilter === "all" || donor.status === statusFilter
-
-    return matchesSearch && matchesLocation && matchesBloodGroup && matchesStatus
+    return matchesSearch && matchesLocation && matchesBloodGroup
   })
 
   // Get unique locations for filter
-  const locations = ["all", ...new Set(dummyDonors.map((donor) => donor.location))]
+  const locations = ["all", ...new Set(dummyDonors.map((donor: Donor) => donor.city))]
 
   // Get unique blood groups for filter
-  const bloodGroups = ["all", ...new Set(dummyDonors.map((donor) => donor.bloodGroup))]
+  const bloodGroups = ["all", ...new Set(dummyDonors.map((donor: Donor) => donor.bloodGroup))]
 
   return (
     <div className="container py-12 md:py-16">
@@ -247,12 +214,12 @@ export default function BloodDonationPage() {
 
         {/* Find Donors Tab */}
         <TabsContent value="donors" className="mt-6">
-          <div className="mb-6 grid gap-4 md:grid-cols-4">
+          <div className="mb-6 grid gap-4 md:grid-cols-3">
             <div className="md:col-span-2">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
                 <Input
-                  placeholder="Search by name, location or blood group"
+                  placeholder="Search by name, city or blood group"
                   className="pl-10"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
@@ -263,12 +230,12 @@ export default function BloodDonationPage() {
             <div>
               <Select value={locationFilter} onValueChange={setLocationFilter}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Filter by location" />
+                  <SelectValue placeholder="Filter by city" />
                 </SelectTrigger>
                 <SelectContent>
                   {locations.map((location) => (
                     <SelectItem key={location} value={location}>
-                      {location === "all" ? "All Locations" : location}
+                      {location === "all" ? "All Cities" : location}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -291,73 +258,39 @@ export default function BloodDonationPage() {
             </div>
           </div>
 
-          <div className="mb-4 flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Filter className="h-4 w-4 text-gray-500" />
-              <span className="text-sm font-medium">Status:</span>
-              <div className="flex space-x-2">
-                <Button
-                  variant={statusFilter === "all" ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setStatusFilter("all")}
-                >
-                  All
-                </Button>
-                <Button
-                  variant={statusFilter === "active" ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setStatusFilter("active")}
-                >
-                  Available
-                </Button>
-                <Button
-                  variant={statusFilter === "inactive" ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setStatusFilter("inactive")}
-                >
-                  Unavailable
-                </Button>
-              </div>
-            </div>
-
-            <p className="text-sm text-gray-600">
-              {filteredDonors.length} donor{filteredDonors.length !== 1 ? "s" : ""} found
-            </p>
-          </div>
-
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {filteredDonors.map((donor) => (
               <Card key={donor.id} className="overflow-hidden">
                 <CardHeader className="pb-2">
                   <div className="flex justify-between items-center">
                     <CardTitle className="text-lg">{donor.name}</CardTitle>
-                    <Badge variant={donor.status === "active" ? "success" : "secondary"}>
-                      {donor.status === "active" ? "Available" : "Unavailable"}
-                    </Badge>
-                  </div>
-                  <div className="flex items-center space-x-2">
                     <Badge variant="outline" className="bg-red-50 text-red-700 hover:bg-red-50">
                       {donor.bloodGroup}
                     </Badge>
-                    <span className="text-sm text-gray-500">
-                      {donor.age} years, {donor.gender}
-                    </span>
                   </div>
                 </CardHeader>
                 <CardContent className="pb-4">
                   <div className="space-y-2">
                     <div className="flex items-center text-sm">
                       <MapPin className="mr-2 h-4 w-4 text-gray-500" />
-                      <span>{donor.location}</span>
+                      <span>{donor.city}</span>
                     </div>
-                    <div className="flex items-center text-sm">
-                      <Phone className="mr-2 h-4 w-4 text-gray-500" />
-                      <span>{donor.phone}</span>
-                    </div>
+                    {donor.phone && (
+                      <div className="flex items-center text-sm">
+                        <Phone className="mr-2 h-4 w-4 text-gray-500" />
+                        <span>{donor.phone}</span>
+                      </div>
+                    )}
                     <div className="flex items-center text-sm">
                       <Mail className="mr-2 h-4 w-4 text-gray-500" />
                       <span>{donor.email}</span>
                     </div>
+                    {donor.message && (
+                      <div className="text-sm text-gray-600 mt-2">
+                        <p className="font-medium">Note:</p>
+                        <p>{donor.message}</p>
+                      </div>
+                    )}
                   </div>
                   <Button className="mt-4 w-full" variant="outline">
                     Contact Donor
@@ -385,60 +318,45 @@ export default function BloodDonationPage() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="space-y-2">
-                    <Label htmlFor="fullName">
+                    <Label htmlFor="name">
                       Full Name <span className="text-red-500">*</span>
                     </Label>
                     <Input
-                      id="fullName"
-                      name="fullName"
-                      value={formData.fullName}
+                      id="name"
+                      name="name"
+                      value={formData.name}
                       onChange={handleInputChange}
-                      className={errors.fullName ? "border-red-500" : ""}
+                      className={errors.name ? "border-red-500" : ""}
                     />
-                    {errors.fullName && <p className="text-xs text-red-500">{errors.fullName}</p>}
+                    {errors.name && <p className="text-xs text-red-500">{errors.name}</p>}
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="age">
-                      Age <span className="text-red-500">*</span>
+                    <Label htmlFor="email">
+                      Email <span className="text-red-500">*</span>
                     </Label>
                     <Input
-                      id="age"
-                      name="age"
-                      type="number"
-                      min="18"
-                      max="65"
-                      value={formData.age}
+                      id="email"
+                      name="email"
+                      type="email"
+                      value={formData.email}
                       onChange={handleInputChange}
-                      className={errors.age ? "border-red-500" : ""}
+                      className={errors.email ? "border-red-500" : ""}
                     />
-                    {errors.age && <p className="text-xs text-red-500">{errors.age}</p>}
+                    {errors.email && <p className="text-xs text-red-500">{errors.email}</p>}
                   </div>
 
                   <div className="space-y-2">
-                    <Label>
-                      Gender <span className="text-red-500">*</span>
-                    </Label>
-                    <RadioGroup
-                      name="gender"
-                      value={formData.gender}
-                      onValueChange={(value) => handleInputChange({ target: { name: "gender", value } })}
-                      className="flex space-x-4"
-                    >
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="Male" id="male" />
-                        <Label htmlFor="male">Male</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="Female" id="female" />
-                        <Label htmlFor="female">Female</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="Other" id="other" />
-                        <Label htmlFor="other">Other</Label>
-                      </div>
-                    </RadioGroup>
-                    {errors.gender && <p className="text-xs text-red-500">{errors.gender}</p>}
+                    <Label htmlFor="phone">Phone Number</Label>
+                    <Input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className={errors.phone ? "border-red-500" : ""}
+                    />
+                    {errors.phone && <p className="text-xs text-red-500">{errors.phone}</p>}
                   </div>
 
                   <div className="space-y-2">
@@ -465,68 +383,49 @@ export default function BloodDonationPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="location">
-                      Location (City/District) <span className="text-red-500">*</span>
+                    <Label htmlFor="city">
+                      City <span className="text-red-500">*</span>
                     </Label>
                     <Input
-                      id="location"
-                      name="location"
-                      value={formData.location}
+                      id="city"
+                      name="city"
+                      value={formData.city}
                       onChange={handleInputChange}
-                      className={errors.location ? "border-red-500" : ""}
+                      className={errors.city ? "border-red-500" : ""}
                     />
-                    {errors.location && <p className="text-xs text-red-500">{errors.location}</p>}
+                    {errors.city && <p className="text-xs text-red-500">{errors.city}</p>}
                   </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="phone">
-                      Phone Number <span className="text-red-500">*</span>
+                  <div className="space-y-2 md:col-span-2">
+                    <Label htmlFor="message">
+                      Message <span className="text-red-500">*</span>
                     </Label>
-                    <Input
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      value={formData.phone}
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
                       onChange={handleInputChange}
-                      className={errors.phone ? "border-red-500" : ""}
+                      className={`w-full min-h-[100px] rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${errors.message ? "border-red-500" : ""
+                        }`}
+                      placeholder="Add information about your availability, preferences, or any specific conditions. For example: 'Available for emergency donations' or 'Can donate on weekends'"
                     />
-                    {errors.phone && <p className="text-xs text-red-500">{errors.phone}</p>}
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="email">
-                      Email <span className="text-red-500">*</span>
-                    </Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className={errors.email ? "border-red-500" : ""}
-                    />
-                    {errors.email && <p className="text-xs text-red-500">{errors.email}</p>}
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label>
-                      Donor Status <span className="text-red-500">*</span>
-                    </Label>
-                    <RadioGroup
-                      name="donorStatus"
-                      value={formData.donorStatus}
-                      onValueChange={(value) => handleInputChange({ target: { name: "donorStatus", value } })}
-                      className="flex space-x-4"
-                    >
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="active" id="active" />
-                        <Label htmlFor="active">Active (Available to donate)</Label>
+                    {errors.message && <p className="text-xs text-red-500">{errors.message}</p>}
+                    <div className="mt-2">
+                      <p className="text-sm text-gray-500 mb-2">Suggested messages:</p>
+                      <div className="flex flex-wrap gap-2">
+                        {messageSuggestions.map((suggestion, index) => (
+                          <Button
+                            key={index}
+                            variant="outline"
+                            size="sm"
+                            className="text-xs"
+                            onClick={() => handleInputChange({ target: { name: "message", value: suggestion } })}
+                          >
+                            {suggestion}
+                          </Button>
+                        ))}
                       </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="inactive" id="inactive" />
-                        <Label htmlFor="inactive">Inactive (Unavailable)</Label>
-                      </div>
-                    </RadioGroup>
+                    </div>
                   </div>
                 </div>
 
