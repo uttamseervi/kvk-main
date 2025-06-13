@@ -1,81 +1,19 @@
 "use client"
 
 import Link from "next/link"
-
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useSession } from "next-auth/react"
+import { useRouter } from "next/navigation"
+import axios from "axios"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Search, Filter, Phone, Mail, MapPin } from "lucide-react"
+import { Search, Phone, Mail, MapPin, Loader2 } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
-
-// Dummy donor data
-const dummyDonors: Donor[] = [
-  {
-    id: 1,
-    name: "Arun Kumar",
-    email: "arun@example.com",
-    phone: "9876543210",
-    bloodGroup: "O+",
-    city: "Bengaluru",
-    message: "Available for emergency donations",
-    donationDate: new Date(),
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: 2,
-    name: "Priya Sharma",
-    email: "priya@example.com",
-    phone: "9876543211",
-    bloodGroup: "A+",
-    city: "Mysuru",
-    message: "Regular donor",
-    donationDate: new Date(),
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: 3,
-    name: "Karthik Rao",
-    email: "karthik@example.com",
-    phone: "9876543212",
-    bloodGroup: "B-",
-    city: "Mangaluru",
-    message: "Available on weekends",
-    donationDate: new Date(),
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: 4,
-    name: "Divya Hegde",
-    email: "divya@example.com",
-    phone: "9876543213",
-    bloodGroup: "AB+",
-    city: "Hubballi",
-    message: "Emergency contact available",
-    donationDate: new Date(),
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: 5,
-    name: "Suresh Gowda",
-    email: "suresh@example.com",
-    phone: "9876543214",
-    bloodGroup: "O-",
-    city: "Bengaluru",
-    message: "Universal donor",
-    donationDate: new Date(),
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  }
-]
+import { toast } from "sonner"
 
 // Define the donor type
 type Donor = {
@@ -91,10 +29,32 @@ type Donor = {
   updatedAt: Date
 }
 
+// Define blood group options
+const BLOOD_GROUPS = [
+  "A_POSITIVE",
+  "A_NEGATIVE",
+  "B_POSITIVE",
+  "B_NEGATIVE",
+  "O_POSITIVE",
+  "O_NEGATIVE",
+  "AB_POSITIVE",
+  "AB_NEGATIVE"
+] as const
+
+// Helper function to format blood group for display
+const formatBloodGroup = (group: string) => {
+  return group.replace('_', '+').replace('_', '-')
+}
+
 export default function BloodDonationPage() {
+  const { data: session, status } = useSession()
+  const router = useRouter()
   const [searchTerm, setSearchTerm] = useState("")
   const [locationFilter, setLocationFilter] = useState("all")
   const [bloodGroupFilter, setBloodGroupFilter] = useState("all")
+  const [donors, setDonors] = useState<Donor[]>([])
+  const [loading, setLoading] = useState(true)
+  const [submitting, setSubmitting] = useState(false)
 
   // Form state
   const [formData, setFormData] = useState({
@@ -123,6 +83,30 @@ export default function BloodDonationPage() {
     "Emergency contact available 24/7"
   ]
 
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/auth")
+    }
+  }, [status, router])
+
+  useEffect(() => {
+    const fetchDonors = async () => {
+      try {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/blood-donation`)
+        setDonors(response.data)
+      } catch (error) {
+        console.error('Error fetching donors:', error)
+        toast.error('Failed to fetch donors. Please try again later.')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    if (session?.user) {
+      fetchDonors()
+    }
+  }, [session])
+
   // Handle form input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | { target: { name: string; value: string } }) => {
     const { name, value } = e.target
@@ -141,15 +125,14 @@ export default function BloodDonationPage() {
   }
 
   // Handle form submission
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setSubmitting(true)
 
     // Basic validation
     const newErrors: Record<string, string> = {}
-    if (!formData.name) newErrors.name = "Name is required"
-    if (!formData.email) newErrors.email = "Email is required"
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Enter a valid email address"
-    if (formData.phone && !/^\d{10}$/.test(formData.phone)) newErrors.phone = "Enter a valid 10-digit phone number"
+    if (!formData.phone) newErrors.phone = "Phone number is required"
+    else if (!/^\d{10}$/.test(formData.phone)) newErrors.phone = "Enter a valid 10-digit phone number"
     if (!formData.bloodGroup) newErrors.bloodGroup = "Blood group is required"
     if (!formData.city) newErrors.city = "City is required"
     if (!formData.message) newErrors.message = "Message is required"
@@ -157,25 +140,42 @@ export default function BloodDonationPage() {
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors)
+      setSubmitting(false)
       return
     }
 
-    // Form is valid - would normally submit to server
-    alert("Registration successful! Thank you for registering as a blood donor.")
+    try {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/blood-donation`, {
+        ...formData,
+        email: session?.user?.email,
+        name: session?.user?.name
+      })
 
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      bloodGroup: "",
-      city: "",
-      message: "",
-    })
+      toast.success('Registration successful! Thank you for registering as a blood donor.')
+
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        bloodGroup: "",
+        city: "",
+        message: "",
+      })
+
+      // Refresh donors list
+      const donorsResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/blood-donation`)
+      setDonors(donorsResponse.data)
+    } catch (error) {
+      console.error('Error registering donor:', error)
+      toast.error('Failed to register as donor. Please try again later.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   // Filter donors based on search and filters
-  const filteredDonors = dummyDonors.filter((donor: Donor) => {
+  const filteredDonors = donors.filter((donor: Donor) => {
     // Search term filter
     const matchesSearch =
       donor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -192,10 +192,21 @@ export default function BloodDonationPage() {
   })
 
   // Get unique locations for filter
-  const locations = ["all", ...new Set(dummyDonors.map((donor: Donor) => donor.city))]
+  const locations = ["all", ...new Set(donors.map((donor: Donor) => donor.city))]
 
   // Get unique blood groups for filter
-  const bloodGroups = ["all", ...new Set(dummyDonors.map((donor: Donor) => donor.bloodGroup))]
+  const bloodGroups = ["all", ...new Set(donors.map((donor: Donor) => donor.bloodGroup))]
+
+  if (loading) {
+    return (
+      <div className="container py-12 md:py-16 flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <Loader2 className="h-8 w-8 animate-spin text-orange-600" />
+          <p className="text-gray-600">Loading donors...</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="container py-12 md:py-16">
@@ -265,7 +276,7 @@ export default function BloodDonationPage() {
                   <div className="flex justify-between items-center">
                     <CardTitle className="text-lg">{donor.name}</CardTitle>
                     <Badge variant="outline" className="bg-red-50 text-red-700 hover:bg-red-50">
-                      {donor.bloodGroup}
+                      {formatBloodGroup(donor.bloodGroup)}
                     </Badge>
                   </div>
                 </CardHeader>
@@ -275,12 +286,6 @@ export default function BloodDonationPage() {
                       <MapPin className="mr-2 h-4 w-4 text-gray-500" />
                       <span>{donor.city}</span>
                     </div>
-                    {donor.phone && (
-                      <div className="flex items-center text-sm">
-                        <Phone className="mr-2 h-4 w-4 text-gray-500" />
-                        <span>{donor.phone}</span>
-                      </div>
-                    )}
                     <div className="flex items-center text-sm">
                       <Mail className="mr-2 h-4 w-4 text-gray-500" />
                       <span>{donor.email}</span>
@@ -292,8 +297,13 @@ export default function BloodDonationPage() {
                       </div>
                     )}
                   </div>
-                  <Button className="mt-4 w-full" variant="outline">
-                    Contact Donor
+                  <Button
+                    className="mt-4 w-full"
+                    variant="outline"
+                    onClick={() => window.location.href = `mailto:${donor.email}`}
+                  >
+                    <Mail className="mr-2 h-4 w-4" />
+                    Contact via Email
                   </Button>
                 </CardContent>
               </Card>
@@ -324,11 +334,10 @@ export default function BloodDonationPage() {
                     <Input
                       id="name"
                       name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      className={errors.name ? "border-red-500" : ""}
+                      value={session?.user?.name || ""}
+                      disabled
+                      className="bg-gray-50"
                     />
-                    {errors.name && <p className="text-xs text-red-500">{errors.name}</p>}
                   </div>
 
                   <div className="space-y-2">
@@ -339,15 +348,14 @@ export default function BloodDonationPage() {
                       id="email"
                       name="email"
                       type="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className={errors.email ? "border-red-500" : ""}
+                      value={session?.user?.email || ""}
+                      disabled
+                      className="bg-gray-50"
                     />
-                    {errors.email && <p className="text-xs text-red-500">{errors.email}</p>}
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number</Label>
+                    <Label htmlFor="phone">Phone Number <span className="text-red-500">*</span></Label>
                     <Input
                       id="phone"
                       name="phone"
@@ -372,9 +380,9 @@ export default function BloodDonationPage() {
                         <SelectValue placeholder="Select blood group" />
                       </SelectTrigger>
                       <SelectContent>
-                        {["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"].map((group) => (
+                        {BLOOD_GROUPS.map((group) => (
                           <SelectItem key={group} value={group}>
-                            {group}
+                            {formatBloodGroup(group)}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -405,8 +413,7 @@ export default function BloodDonationPage() {
                       name="message"
                       value={formData.message}
                       onChange={handleInputChange}
-                      className={`w-full min-h-[100px] rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${errors.message ? "border-red-500" : ""
-                        }`}
+                      className={`w-full min-h-[100px] rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${errors.message ? "border-red-500" : ""}`}
                       placeholder="Add information about your availability, preferences, or any specific conditions. For example: 'Available for emergency donations' or 'Can donate on weekends'"
                     />
                     {errors.message && <p className="text-xs text-red-500">{errors.message}</p>}
@@ -439,8 +446,15 @@ export default function BloodDonationPage() {
                   </div>
                 </div>
 
-                <Button type="submit" className="w-full">
-                  Register as Donor
+                <Button type="submit" className="w-full" disabled={submitting}>
+                  {submitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Registering...
+                    </>
+                  ) : (
+                    'Register as Donor'
+                  )}
                 </Button>
 
                 <p className="text-center text-xs text-gray-500">
